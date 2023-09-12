@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:hindi_course/pages/loginPage.dart';
 import 'pages/home_pg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 void main()
@@ -18,11 +19,13 @@ class FirstApp extends StatelessWidget
     return MaterialApp(
       //home: HomePage(),
       themeMode: ThemeMode.light,
-      theme: ThemeData(primarySwatch: Colors.green),
+      theme: ThemeData(primarySwatch: Colors.green,
+      fontFamily: GoogleFonts.lato().fontFamily),
+      
       darkTheme: ThemeData(
         brightness: Brightness.dark,
       ),
-      initialRoute: "/home",
+      initialRoute: "/",
       routes:{
         "/":(context)=>LoginPage(),
         "/home":(context)=>HomePage(),
