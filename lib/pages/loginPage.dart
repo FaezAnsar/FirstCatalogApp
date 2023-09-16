@@ -35,9 +35,10 @@ class _LoginPageState extends State<LoginPage> {
       });
       await Future.delayed(Duration(seconds: 1),);
       await Navigator.pushNamed(context, MyRoutes.homeRoute);
-      //sets state to false immediately after new screen is pushed sp when we return back to login screen the widgets are refreshed due to set state thus we seee changes then
+      //set state sets click to false immediately after new screen is pushed sp when we return back to login screen the widgets are refreshed due to set state thus we seee changes then
       setState(() {
         click = false;
+        name = '';
         _controller.text="";//empties username
         _controller2.text= "";// empties password
 
@@ -51,25 +52,25 @@ class _LoginPageState extends State<LoginPage> {
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: SingleChildScrollView(
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Image.asset(
-                      "assets/images/undraw_two_factor_authentication_namy.png",
-                      fit: BoxFit.cover),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text("Welcome $name",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                Image.asset(
+                    "assets/images/undraw_two_factor_authentication_namy.png",
+                    fit: BoxFit.cover),
+                SizedBox(
+                  height: 20,
+                ),
+                Text("Welcome $name",
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                  child: Form(
+                    key: _formKey,
                     child: Column(
                       children: [
                         TextFormField(
@@ -86,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                             }
                               else
                               {return null;}
-            
+                              
                             
                           },
                               onChanged: (value){
@@ -96,12 +97,12 @@ class _LoginPageState extends State<LoginPage> {
                                 setState(() {
                                   
                                 });
-
+                  
                               },
                               
-
+                  
                             
-
+                  
                               
                               
                         ),
@@ -111,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                         TextFormField(
                           controller: _controller2, //to control text 
                             
-            
+                              
                           obscureText: true,
                           decoration: InputDecoration(
                               hintText: "Enter password", labelText: "Password"),
@@ -121,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                             }
                               else if(value.length<6)
                               {return "Enter at least 6 characters";}
-            
+                              
                               else
                               {return null;}
                             },
@@ -155,9 +156,9 @@ class _LoginPageState extends State<LoginPage> {
                         // )
                       ],
                     ),
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             ),
           ),
         ));
