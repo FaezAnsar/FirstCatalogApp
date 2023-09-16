@@ -1,8 +1,9 @@
 import "package:flutter/material.dart";
 import 'package:hindi_course/pages/loginPage.dart';
 import 'package:hindi_course/utilities/routes.dart';
+import 'package:hindi_course/widgets/themes.dart';
 import 'pages/home_pg.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 
 void main()
@@ -19,13 +20,12 @@ class FirstApp extends StatelessWidget
   {
     return MaterialApp(
       //home: HomePage(),
-      themeMode: ThemeMode.light,
-      theme: ThemeData(primarySwatch: Colors.green,
-      fontFamily: GoogleFonts.lato().fontFamily),
       
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-      ),
+      themeMode: ThemeMode.light,
+      
+      theme: MyTheme.light(context),
+      
+      darkTheme: MyTheme.dark(context),
       initialRoute: MyRoutes.homeRoute,
       routes:{
         "/":(context)=>LoginPage(),
