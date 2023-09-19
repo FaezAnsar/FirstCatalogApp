@@ -1,15 +1,68 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hindi_course/models/catalog.dart';
 import 'package:hindi_course/widgets/drawer.dart';
 import 'package:hindi_course/widgets/item_widget.dart';
 
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   
-  final int days =30;
-  final String name = "Codepur";
+
    HomePage({super.key});
-  final dummy_list = List.generate(15, (index) => CatalogModel.items[0]) ;
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final int days =30;
+
+  final String name = "Codepur";
+
+  
+
+//called when object is first inserted into tree
+//i.e before build method is called
+  @override
+  void initState(){
+    super.initState();
+    loadData();
+  }
+
+  loadData() async{
+
+    //since we are getting data locally it is very fast ,so we give delay to simulate real life in which data takes time to come thus catalog.items will be null for that time
+    await Future.delayed(Duration(seconds: 2));
+    //(root bundle contains resources packaged with this app),it finds the file and  loads it as string
+    var jsonString = await rootBundle.loadString("assets/files/catalog.json");
+    //converts string to Json obj i.e map
+    //basically jsonDecode just removes the inverted commas/string apostrophe
+    var jsonObject = jsonDecode(jsonString);
+    var productsList = jsonObject["products"];
+    //creating list of items
+    CatalogModel.items = List.from(productsList).map<Item>((item) => Item.fromMap(item)).toList();
+    setState(() {
+      
+    });
+  }
+Widget? getItemWidget() {
+  var shadow = CatalogModel.items;
+  if (shadow!= null && shadow.isNotEmpty) {
+  
+  //builder renders items only on screen and some before and after it so when we scroll we don't feel they are being rendered after coming on screen
+    return  ListView.builder(
+          itemCount:shadow.length ,
+        itemBuilder: (context, index) {
+          return ItemWidget(
+            item: shadow[index]);
+            },
+            );
+  } else {
+    return null; 
+  }
+}
 
 
   @override
@@ -20,13 +73,8 @@ class HomePage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        //builder renders items only on screen and some before and after it so when we scroll we don't feel they are being rendered after coming on screen
-        child: ListView.builder(
-          itemCount:dummy_list.length ,
-        itemBuilder: (context, index) {
-          return ItemWidget(
-            item: dummy_list[index]);
-        },),
+        //if 
+        child:getItemWidget()??Center(child: CircularProgressIndicator(),)
       ),
       drawer: MyDrawer(),
     );
