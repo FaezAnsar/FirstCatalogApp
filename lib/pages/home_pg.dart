@@ -54,13 +54,29 @@ Widget? getItemWidget() {
   if (shadow!= null && shadow.isNotEmpty) {
   
   //builder renders items only on screen and some before and after it so when we scroll we don't feel they are being rendered after coming on screen
-    return  ListView.builder(
+    return  GridView.builder(
+      
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1,mainAxisSpacing: 16,crossAxisSpacing: 16),
+      
           itemCount:shadow.length ,
         itemBuilder: (context, index) {
-          return ItemWidget(
-            item: shadow[index]);
-            },
-            );
+          var item = shadow[index];
+          return Card(
+            clipBehavior: Clip.antiAlias,
+            child: GridTile(
+              header: Container(
+                decoration:BoxDecoration(color: Colors.green,),
+                padding: EdgeInsets.all(10),
+                child: Text(item.name,style: TextStyle(color: Colors.white),)),
+              footer: Container(
+                decoration:BoxDecoration(color: Colors.black,),
+                padding: EdgeInsets.all(10),
+                child: Text("\$${item.price}".toString(),style:TextStyle(color: Colors.white) ,)),
+              child: Image.network(item.image)
+              ),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              );
+   } );
   } else {
     return null; 
   }
