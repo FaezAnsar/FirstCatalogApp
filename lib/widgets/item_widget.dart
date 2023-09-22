@@ -11,22 +11,52 @@ class ItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
      
-     //style 1
-     //return 
-     // Card(
-    //   child: ListTile(
-    //     leading: Image.network(item.image),
-    //     title: Text(item.name),
-    //     subtitle: Text(item.desc),
-    //     trailing: Text("\$${item.price}",
-    //     style:TextStyle(color: Colors.green,
-    //     fontWeight: FontWeight.bold) ,
-    //     textScaleFactor:1.5 ,),
-        
-    //   ),
-    // ) ;
+     //list card style
+     //return Style1(item: item);
 
     //style 2
+    return Style2(item: item);
+  }
+}
+
+
+class Style1 extends StatelessWidget {
+  const Style1({
+    super.key,
+    required this.item,
+  });
+
+  final Item item;
+
+  @override
+  Widget build(BuildContext context) {
+    
+    return 
+    Card(
+     child: ListTile(
+       leading: Image.network(item.image),
+       title: Text(item.name),
+       subtitle: Text(item.desc),
+       trailing: Text("\$${item.price}",
+       style:TextStyle(color: Colors.green,
+       fontWeight: FontWeight.bold) ,
+       textScaleFactor:1.5 ,),
+       
+     ),
+    ) ;
+  }
+}
+
+class Style2 extends StatelessWidget {
+  const Style2({
+    super.key,
+    required this.item,
+  });
+
+  final Item item;
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 10,bottom: 10),
       child: Container(
@@ -63,7 +93,7 @@ class ItemWidget extends StatelessWidget {
                     Text(item.name,style: TextStyle(fontWeight: FontWeight.bold),),
                     Text(item.desc,style: TextStyle(fontStyle:FontStyle.normal,color: Colors.grey,fontWeight: FontWeight.w500,fontSize: MediaQuery.of(context).size.width * 0.028,overflow: TextOverflow.ellipsis, // Truncate with ellipsis when text overflows
    ), // Limit to a single line),
-    maxLines: 1,
+                    maxLines: 1,
                     ),
                     SizedBox(height: 7,),
                     Expanded(
@@ -71,7 +101,7 @@ class ItemWidget extends StatelessWidget {
                         alignment: MainAxisAlignment.spaceBetween,
                         buttonPadding: EdgeInsets.zero,
                         children: [
-                        Text("\$${item.price.toString()}",style: TextStyle(fontWeight: FontWeight.bold),),
+                        Text("\$${item.price.toString()}",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
                         ElevatedButton(onPressed: (){}, child: Text("Buy"),style: ButtonStyle(shape: MaterialStatePropertyAll(BeveledRectangleBorder(borderRadius: BorderRadius.circular(6),))))
                         ],
                       ),

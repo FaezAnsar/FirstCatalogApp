@@ -7,6 +7,8 @@ import 'package:hindi_course/widgets/drawer.dart';
 import 'package:hindi_course/widgets/item_widget.dart';
 import 'package:hindi_course/widgets/themes.dart';
 
+import 'catalogHeader.dart';
+
 
 class HomePage extends StatefulWidget {
   
@@ -92,21 +94,7 @@ Widget? getItemWidget() {
   }
 }
 
-class CatalogHeader extends StatelessWidget {
-  const CatalogHeader({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children:[Text("Catalog App",style: TextStyle(color: Colors.deepPurple,fontSize: 40,fontWeight: FontWeight.bold)),
-            SizedBox(height: 10,),
-            Text("Trending Products",style: TextStyle(color: Colors.black87,fontSize: 20),)
-      ],
-    );
-  }
-}
- // appBar: AppBar(
+// appBar: AppBar(
       //   title: Text("Catalog App "),
       // ),
       // body: Padding(
