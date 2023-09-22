@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:hindi_course/models/catalog.dart';
 import 'package:hindi_course/widgets/drawer.dart';
 import 'package:hindi_course/widgets/item_widget.dart';
+import 'package:hindi_course/widgets/themes.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -53,30 +54,17 @@ Widget? getItemWidget() {
   //isnotEmpty is only checked after shadow!=null gives true thus we can't swap both conditions as isnptempty cant be called on null
   if (shadow!= null && shadow.isNotEmpty) {
   
-  //builder renders items only on screen and some before and after it so when we scroll we don't feel they are being rendered after coming on screen
-    return  GridView.builder(
-      
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1,mainAxisSpacing: 16,crossAxisSpacing: 16),
-      
-          itemCount:shadow.length ,
-        itemBuilder: (context, index) {
-          var item = shadow[index];
-          return Card(
-            clipBehavior: Clip.antiAlias,
-            child: GridTile(
-              header: Container(
-                decoration:BoxDecoration(color: Colors.green,),
-                padding: EdgeInsets.all(10),
-                child: Text(item.name,style: TextStyle(color: Colors.white),)),
-              footer: Container(
-                decoration:BoxDecoration(color: Colors.black,),
-                padding: EdgeInsets.all(10),
-                child: Text("\$${item.price}".toString(),style:TextStyle(color: Colors.white) ,)),
-              child: Image.network(item.image)
-              ),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-              );
-   } );
+ return  ListView.builder(
+   shrinkWrap: true,
+   
+   //gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisSpacing: 16,crossAxisSpacing: 16),
+   
+       itemCount:shadow.length ,
+     itemBuilder: (context, index) {
+       var item = shadow[index];
+       return ItemWidget(item: item);
+         
+  } );
   } else {
     return null; 
   }
@@ -86,15 +74,44 @@ Widget? getItemWidget() {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Catalog App "),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        //if 
-        child:getItemWidget()??Center(child: CircularProgressIndicator(),)
-      ),
-      drawer: MyDrawer(),
+      backgroundColor: MyTheme.creamColor,
+     body: SafeArea(
+      child: Container(
+        padding:EdgeInsets.all(20),
+        child: Column(
+          
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CatalogHeader(),
+            Expanded(child: getItemWidget()??Center(child: CircularProgressIndicator(),)),
+            
+          ],
+        ),
+      )),
     );
   }
 }
+
+class CatalogHeader extends StatelessWidget {
+  const CatalogHeader({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children:[Text("Catalog App",style: TextStyle(color: Colors.deepPurple,fontSize: 40,fontWeight: FontWeight.bold)),
+            SizedBox(height: 10,),
+            Text("Trending Products",style: TextStyle(color: Colors.black87,fontSize: 20),)
+      ],
+    );
+  }
+}
+ // appBar: AppBar(
+      //   title: Text("Catalog App "),
+      // ),
+      // body: Padding(
+      //   padding: const EdgeInsets.all(16.0),
+      //   //if 
+      //   child:getItemWidget()??Center(child: CircularProgressIndicator(),)
+      // ),
+      // drawer: MyDrawer(),
