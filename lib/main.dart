@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+
 import 'package:hindi_course/pages/loginPage.dart';
 import 'package:hindi_course/utilities/routes.dart';
 import 'package:hindi_course/widgets/themes.dart';
@@ -31,7 +32,9 @@ class FirstApp extends StatelessWidget
       routes:{
         "/":(context)=>LoginPage(),
         MyRoutes.homeRoute:(context)=>HomePage(),
-        MyRoutes.loginRoute:(context)=>LoginPage()
+        MyRoutes.loginRoute:(context)=>LoginPage(),
+        
+
       }
     );
   }

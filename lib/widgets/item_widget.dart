@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hindi_course/widgets/themes.dart';
 
 import '../models/catalog.dart';
@@ -82,7 +83,9 @@ class Style2 extends StatelessWidget {
               decoration: BoxDecoration(color: MyTheme.creamColor,borderRadius: BorderRadius.circular(8)),
               child: Padding(
                 padding: const EdgeInsets.all(7.0),
-                child: Image.network(item.image),
+                child: Hero(
+                  tag: Key(item.id.toString()),
+                  child: Image.network(item.image)),
               )),
               SizedBox(width: 7,),
               Expanded(
@@ -101,7 +104,7 @@ class Style2 extends StatelessWidget {
                         alignment: MainAxisAlignment.spaceBetween,
                         buttonPadding: EdgeInsets.zero,
                         children: [
-                        Text("\$${item.price.toString()}",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
+                        Text("\$${item.price.toString()}",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,fontFamily: GoogleFonts.roboto().fontFamily)),
                         ElevatedButton(onPressed: (){}, child: Text("Buy"),style: ButtonStyle(shape: MaterialStatePropertyAll(BeveledRectangleBorder(borderRadius: BorderRadius.circular(6),))))
                         ],
                       ),

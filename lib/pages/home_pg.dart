@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hindi_course/models/catalog.dart';
-import 'package:hindi_course/widgets/drawer.dart';
+import 'package:hindi_course/pages/item_detail_page.dart';
+import 'package:hindi_course/utilities/routes.dart';
+
 import 'package:hindi_course/widgets/item_widget.dart';
 import 'package:hindi_course/widgets/themes.dart';
 
@@ -37,7 +39,7 @@ class _HomePageState extends State<HomePage> {
   loadData() async{
 
     //since we are getting data locally it is very fast ,so we give delay to simulate real life in which data takes time to come thus catalog.items will be null for that time
-    await Future.delayed(Duration(seconds: 2));
+   // await Future.delayed(Duration(seconds: 2));
     //(root bundle contains resources packaged with this app),it finds the file and  loads it as string
     var jsonString = await rootBundle.loadString("assets/files/catalog.json");
     //converts string to Json obj i.e map in this case
@@ -64,7 +66,11 @@ Widget? getItemWidget() {
        itemCount:shadow.length ,
      itemBuilder: (context, index) {
        var item = shadow[index];
-       return ItemWidget(item: item);
+       return InkWell(
+      
+        //didn't use Navigator.pushNamed as we want to pass item to the page but it takes route only,while in .push we can pass object
+        onTap: () => Navigator.push(context,MaterialPageRoute(builder: (context)=>ItemDetailPage(item: item,)) ),
+        child: ItemWidget(item: item));
          
   } );
   } else {
@@ -85,7 +91,8 @@ Widget? getItemWidget() {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CatalogHeader(),
-            Expanded(child: getItemWidget()??Center(child: CircularProgressIndicator(),)),
+            Expanded(child: getItemWidget()
+            ??Center(child: CircularProgressIndicator(),)),
             
           ],
         ),
