@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hindi_course/models/catalog.dart';
 import 'package:hindi_course/pages/item_detail_page.dart';
 import 'package:hindi_course/utilities/routes.dart';
+
 
 import 'package:hindi_course/widgets/item_widget.dart';
 import 'package:hindi_course/widgets/themes.dart';
@@ -81,9 +83,16 @@ Widget? getItemWidget() {
 
   @override
   Widget build(BuildContext context) {
+    
+
     return Scaffold(
-      backgroundColor: MyTheme.creamColor,
+      backgroundColor: Theme.of(context).canvasColor,
+      floatingActionButton: FloatingActionButton(onPressed:()=>Navigator.pushNamed(context,MyRoutes.cartRoute),
+      
+      backgroundColor: MyTheme.darkBluishColor,
+      child: Icon(CupertinoIcons.cart,color: Colors.white,),),
      body: SafeArea(
+
       child: Container(
         padding:EdgeInsets.all(20),
         child: Column(
@@ -91,8 +100,11 @@ Widget? getItemWidget() {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CatalogHeader(),
-            Expanded(child: getItemWidget()
-            ??Center(child: CircularProgressIndicator(),)),
+            Expanded(child: Padding(
+              padding: const EdgeInsets.only(top:16.0),
+              child: getItemWidget()
+              ??Center(child: CircularProgressIndicator(),),
+            )),
             
           ],
         ),

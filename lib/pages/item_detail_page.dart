@@ -10,10 +10,10 @@ class ItemDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(backgroundColor: Colors.transparent,),
       bottomNavigationBar: Container(
         
-        color: Colors.white,
+        color: Theme.of(context).cardColor,
         child: ButtonBar(
           buttonMinWidth: 100,
           
@@ -23,11 +23,14 @@ class ItemDetailPage extends StatelessWidget {
                           children: [
                           
                           
-                          Text("\$${item.price.toString()}",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25,fontFamily: GoogleFonts.roboto().fontFamily),),
+                          Text("\$${item.price.toString()}",style: TextStyle(fontWeight: FontWeight.bold,color:Color.fromARGB(255, 166, 25, 25),fontSize: 25,fontFamily: GoogleFonts.roboto().fontFamily),),
                           //wrapped with sized box to change butoon width height
-                          SizedBox(width: 100,height: 50,
+                          SizedBox(width: 120,height: 50,
 
-                            child: ElevatedButton(onPressed: (){}, child: Text("Buy"),style: ButtonStyle(shape: MaterialStatePropertyAll(BeveledRectangleBorder(borderRadius: BorderRadius.circular(6),)))))
+                            child: ElevatedButton(onPressed: (){}, child: Text("Add to Cart"),style: ButtonStyle(
+                              shape: MaterialStatePropertyAll(BeveledRectangleBorder(borderRadius: BorderRadius.circular(6),)
+                              ,),
+                              backgroundColor: MaterialStatePropertyAll(Theme.of(context).focusColor))))
                           ],
                           
         ),
@@ -56,16 +59,19 @@ class ItemDetailPage extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
 
                     padding: EdgeInsets.all(0),
-                    decoration: BoxDecoration(color: Colors.white,),
+                    decoration: BoxDecoration(color: Theme.of(context).cardColor,),
                     child: Padding(
                       padding: const EdgeInsets.only(top:70.0),
                       child: Column(children: [
                         
                         Text(item.name,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),),
-                      Text(item.desc,style: TextStyle(fontStyle:FontStyle.normal,color: Colors.grey,fontWeight: FontWeight.w500,fontSize: 20 // Truncate with ellipsis when text overflows
-                       ), // Limit to a single line),
-                      
-                      ),
+                      Text(item.desc,style: TextStyle(fontStyle:FontStyle.normal,color: Colors.grey,fontWeight: FontWeight.w500,fontSize: 20),
+                       
+            ),SizedBox(height: 30,),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("Wohl  sage schwankende euren der nach welt einer wird. Lauf jenem macht mögt lebens ich, aus sich herzen noch einer  den ach euch den, wenn das ach jenem freundschaft die noch und und, neu und es ergreift um bringt. Fühl bang sang der es lispelnd sich glück unbekannten.",style: TextStyle(color: Colors.grey),),
+            )
                       ]),
                     ),
                     

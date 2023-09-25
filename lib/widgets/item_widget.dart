@@ -65,7 +65,7 @@ class Style2 extends StatelessWidget {
        
         height: 100,
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
-        color: Colors.white,
+        color: Theme.of(context).cardColor,
         ),
         
        // color: Colors.green,
@@ -80,9 +80,9 @@ class Style2 extends StatelessWidget {
               
               width: 130,
               
-              decoration: BoxDecoration(color: MyTheme.creamColor,borderRadius: BorderRadius.circular(8)),
+              decoration: BoxDecoration(color: Theme.of(context).canvasColor,borderRadius: BorderRadius.circular(8)),
               child: Padding(
-                padding: const EdgeInsets.all(7.0),
+                padding: const EdgeInsets.all(5),
                 child: Hero(
                   tag: Key(item.id.toString()),
                   child: Image.network(item.image)),
@@ -104,8 +104,8 @@ class Style2 extends StatelessWidget {
                         alignment: MainAxisAlignment.spaceBetween,
                         buttonPadding: EdgeInsets.zero,
                         children: [
-                        Text("\$${item.price.toString()}",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,fontFamily: GoogleFonts.roboto().fontFamily)),
-                        ElevatedButton(onPressed: (){}, child: Text("Buy"),style: ButtonStyle(shape: MaterialStatePropertyAll(BeveledRectangleBorder(borderRadius: BorderRadius.circular(6),))))
+                        Text("\$${item.price.toString()}",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,fontFamily: GoogleFonts.roboto().fontFamily,color: Theme.of(context).highlightColor)),
+                        ElevatedButton(onPressed: (){}, child: Text("Add to Cart"),style: ButtonStyle(shape: MaterialStatePropertyAll(BeveledRectangleBorder(borderRadius: BorderRadius.circular(6),)),backgroundColor: MaterialStatePropertyAll(Theme.of(context).focusColor)))
                         ],
                       ),
                     )

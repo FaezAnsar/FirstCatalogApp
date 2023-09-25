@@ -12,9 +12,9 @@ class CatalogHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children:[Text("Catalog App",style: TextStyle(color: Colors.green,fontSize: 40,fontWeight: FontWeight.bold)),
+      children:[Text("Catalog App",style: TextStyle(color:Theme.of(context).highlightColor,fontSize: 40,fontWeight: FontWeight.bold)),
             SizedBox(height: 10,),
-            Text("Trending Products",style: TextStyle(color: Colors.black87,fontSize: 20),)
+            Text("Trending Products",style: TextStyle(color: Theme.of(context).highlightColor,fontSize: 20),)
       ],
     );
   }
