@@ -86,7 +86,8 @@ Widget? getItemWidget() {
     
 
     return Scaffold(
-      backgroundColor: Theme.of(context).canvasColor,
+      //works fine as bg is set to canvas color
+      //backgroundColor: Theme.of(context).canvasColor,
       floatingActionButton: FloatingActionButton(onPressed:()=>Navigator.pushNamed(context,MyRoutes.cartRoute),
       
       backgroundColor: MyTheme.darkBluishColor,

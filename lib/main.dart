@@ -34,9 +34,9 @@ class FirstApp extends StatelessWidget
       theme: MyTheme.light(context),
       
       darkTheme: MyTheme.dark(context),
-      initialRoute: MyRoutes.loginRoute,
+      //initialRoute: MyRoutes.loginRoute,
       routes:{
-        "/":(context)=>LoginPage(),
+        "/":(context)=>HomePage(),
         MyRoutes.homeRoute:(context)=>HomePage(),
         MyRoutes.loginRoute:(context)=>LoginPage(),
         MyRoutes.cartRoute:(context)=>CartPage(),

@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hindi_course/widgets/themes.dart';
+
 
 import '../models/catalog.dart';
 

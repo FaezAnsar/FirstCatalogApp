@@ -14,7 +14,7 @@ class MyTheme {
         color: Colors.white,
         elevation: 0.0,
         iconTheme: IconThemeData(color: Colors.black),
-       
+       foregroundColor: Colors.black,
       ));
 
   static ThemeData dark(BuildContext context) => ThemeData(
@@ -26,8 +26,10 @@ class MyTheme {
       highlightColor: Colors.white,
       appBarTheme: AppBarTheme(
         color: Colors.black,
+        
         elevation: 0.0,
         iconTheme: IconThemeData(color: Colors.white),
+        foregroundColor: Colors.white,
         
             ),
       );
