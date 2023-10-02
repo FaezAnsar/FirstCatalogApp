@@ -100,10 +100,10 @@ class Item {
 class CatalogModel{
 static  List<Item>?  items  ;
 
-static Item? getbyid(int ID)=>items?.firstWhere((element) => element.id==ID ,orElse:null,);
+ Item? getbyid(int ID)=>items?.firstWhere((element) => element.id==ID ,orElse:null,);
 
 //just made this cuz of tutorial idthink it's necessary
-static Item? getbyPosition(int pos){
+ Item? getbyPosition(int pos){
   var shadow = items;
    if (shadow!=null)
    return shadow[pos];

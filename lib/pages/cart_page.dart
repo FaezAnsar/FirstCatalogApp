@@ -58,7 +58,9 @@ class CartTotal extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text("\$999",style: TextStyle(fontSize:25),),
-          ElevatedButton(onPressed: (){}, child: Text("Buy"),style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).focusColor)))        ],
+          ElevatedButton(onPressed: (){
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Buying not supported yet.")));
+          }, child: Text("Buy"),style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).focusColor)))        ],
       ),
     );
   }
