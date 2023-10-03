@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hindi_course/models/cart.dart';
 
 
 import '../models/catalog.dart';
@@ -105,7 +106,7 @@ class Style2 extends StatelessWidget {
                         buttonPadding: EdgeInsets.zero,
                         children: [
                         Text("\$${item.price.toString()}",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,fontFamily: GoogleFonts.roboto().fontFamily,color: Theme.of(context).highlightColor)),
-                        ElevatedButton(onPressed: (){}, child: Text("Add to Cart"),style: ButtonStyle(shape: MaterialStatePropertyAll(BeveledRectangleBorder(borderRadius: BorderRadius.circular(6),)),backgroundColor: MaterialStatePropertyAll(Theme.of(context).focusColor)))
+                        _AddtoCart(item:item)
                         ],
                       ),
                     )
@@ -116,5 +117,43 @@ class Style2 extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class _AddtoCart extends StatefulWidget {
+  final Item item;
+  const _AddtoCart({required this.item});
+
+  @override
+  State<_AddtoCart> createState() => _AddtoCartState();
+}
+
+class _AddtoCartState extends State<_AddtoCart> {
+  
+  bool pressed = false;
+  @override
+  Widget build(BuildContext context) {
+   
+    return ElevatedButton(onPressed: () async{
+      pressed = true;
+      final _catalog = CatalogModel();
+      final _cart = CartModel();
+      _cart.catalog = _catalog;//using setter of cart model to assign catalog
+     _cart.add(widget.item);//adding the item we got from constructor initialization
+      setState(() {
+        
+      });
+      await Future.delayed(Duration(seconds: 2));
+      pressed = false;
+      setState(() {
+        
+      });
+    }, 
+    
+    child: (pressed)?Icon(Icons.done):Text("Add to Cart"),
+
+    style: ButtonStyle(
+      shape: MaterialStatePropertyAll(BeveledRectangleBorder(borderRadius: BorderRadius.circular(6),)),
+      backgroundColor: MaterialStatePropertyAll(Theme.of(context).focusColor)));
   }
 }
