@@ -6,11 +6,14 @@ import 'package:flutter/services.dart';
 import 'package:hindi_course/models/catalog.dart';
 import 'package:hindi_course/pages/item_detail_page.dart';
 import 'package:hindi_course/utilities/routes.dart';
-
+import 'package:http/http.dart' as http;
 
 import 'package:hindi_course/widgets/item_widget.dart';
 import 'package:hindi_course/widgets/themes.dart';
+import 'package:velocity_x/velocity_x.dart';
 
+import '../core/store.dart';
+import '../models/cart.dart';
 import 'catalogHeader.dart';
 
 
@@ -27,7 +30,7 @@ class _HomePageState extends State<HomePage> {
   final int days =30;
 
   final String name = "Codepur";
-
+final url = "https://api.jsonbin.io/b/604dbddb683e7e079c4eefd3";//didnt use this as invalid api
   
 
 //called when object is first inserted into tree
@@ -46,6 +49,9 @@ class _HomePageState extends State<HomePage> {
     var jsonString = await rootBundle.loadString("assets/files/catalog.json");
     //converts string to Json obj i.e map in this case
     //basically jsonDecode just removes the inverted commas/string apostrophe
+  
+  
+   
     var jsonObject = jsonDecode(jsonString);
     var productsList = jsonObject["products"];
     //creating list of items
@@ -84,14 +90,18 @@ Widget? getItemWidget() {
   @override
   Widget build(BuildContext context) {
     
-
+ final CartModel _cart = (VxState.store as MyStore).cart;
     return Scaffold(
       //works fine as bg is set to canvas color
       //backgroundColor: Theme.of(context).canvasColor,
-      floatingActionButton: FloatingActionButton(onPressed:()=>Navigator.pushNamed(context,MyRoutes.cartRoute),
-      
-      backgroundColor: MyTheme.darkBluishColor,
-      child: Icon(CupertinoIcons.cart,color: Colors.white,),),
+      floatingActionButton: VxBuilder(
+        mutations: {AddMutation,RemoveMutation},
+        builder:(context, _,__) =>  FloatingActionButton(
+          onPressed:()=>Navigator.pushNamed(context,MyRoutes.cartRoute),
+        
+        backgroundColor: MyTheme.darkBluishColor,
+        child: Icon(CupertinoIcons.cart,color: Colors.white,),).badge(color: Vx.red500,size: 20,count: _cart.items.length),
+      ),
      body: SafeArea(
 
       child: Container(
