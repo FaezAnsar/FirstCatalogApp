@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hindi_course/models/cart.dart';
+import 'package:velocity_x/velocity_x.dart';
+
+import '../core/store.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -30,24 +33,24 @@ class CartPage extends StatelessWidget {
 class CartList extends StatelessWidget {
    CartList({super.key});
 
-  final cartobj = CartModel();
+  final CartModel _cart = (VxState.store as MyStore).cart;
 
   @override
   Widget build(BuildContext context) {
-    if (cartobj.items.isEmpty) {
+    if (_cart.items.isEmpty) {
       return Center(child: Text("Nothing to show",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),));
     } else {
       return ListView.builder(
-      itemCount: cartobj.items.length
+      itemCount: _cart.items.length
       ,itemBuilder:(context, index) => ListTile(
         leading: Icon(Icons.done),
         trailing: IconButton(icon: Icon(Icons.remove_circle_outline,),
         onPressed:() { 
-          cartobj.remove(cartobj.items[index]) ;
+          _cart.remove(_cart.items[index]) ;
           ;
           }),
     
-        title: Text("${cartobj.items[index]?.name}"),
+        title: Text("${_cart.items[index]?.name}"),
 
       ),);
     }
@@ -62,13 +65,13 @@ class CartTotal extends StatelessWidget {
  
   @override
   Widget build(BuildContext context) {
-    final  cartobj = CartModel();
+     final CartModel _cart = (VxState.store as MyStore).cart;
     return SizedBox(
       height: 100,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text("\$${cartobj.totalPrice}",style: TextStyle(fontSize:25),),
+          Text("\$${_cart.totalPrice}",style: TextStyle(fontSize:25),),
           ElevatedButton(onPressed: (){
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Buying not supported yet.")));
           }, child: Text("Buy"),style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).focusColor)))        ],
