@@ -27,26 +27,30 @@ class CartPage extends StatelessWidget {
   }
 }
 
-class CartList extends StatefulWidget {
-  const CartList({super.key});
+class CartList extends StatelessWidget {
+   CartList({super.key});
 
-  @override
-  State<CartList> createState() => _CartListState();
-}
-
-class _CartListState extends State<CartList> {
-  
   final cartobj = CartModel();
+
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    if (cartobj.items.isEmpty) {
+      return Center(child: Text("Nothing to show",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),));
+    } else {
+      return ListView.builder(
       itemCount: cartobj.items.length
       ,itemBuilder:(context, index) => ListTile(
         leading: Icon(Icons.done),
-        trailing: Icon(Icons.remove_circle_outline),
+        trailing: IconButton(icon: Icon(Icons.remove_circle_outline,),
+        onPressed:() { 
+          cartobj.remove(cartobj.items[index]) ;
+          ;
+          }),
+    
         title: Text("${cartobj.items[index]?.name}"),
 
       ),);
+    }
   }
 }
 

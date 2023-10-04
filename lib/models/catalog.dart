@@ -98,12 +98,7 @@ class Item {
 
 
 class CatalogModel{
-static final catModelobj = CatalogModel.solo();
 
- CatalogModel.solo();
-
- //whenever catamodel obj is created return the same static obj
-factory CatalogModel()=>catModelobj;
 
 
 static  List<Item>?  items  ;

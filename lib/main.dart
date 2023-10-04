@@ -1,10 +1,11 @@
 import "package:flutter/material.dart";
 import 'package:hindi_course/pages/cart_page.dart';
-
+import 'package:velocity_x/velocity_x.dart';
 
 import 'package:hindi_course/pages/loginPage.dart';
 import 'package:hindi_course/utilities/routes.dart';
 import 'package:hindi_course/widgets/themes.dart';
+import 'core/store.dart';
 import 'pages/home_pg.dart';
 
 
@@ -12,7 +13,7 @@ import 'pages/home_pg.dart';
 void main()
 {
   
-  runApp(FirstApp());
+  runApp(VxState(store:MyStore(),child: FirstApp()));
 }
 
 class FirstApp extends StatelessWidget

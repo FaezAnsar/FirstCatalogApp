@@ -2,16 +2,11 @@ import 'package:hindi_course/models/catalog.dart';
 
 class CartModel{
 
-static final cartModelobj = CartModel.solo(catalog: CatalogModel());
 
- CartModel.solo({required catalog}):_catalog= catalog;
 
- //whenever cartmodel obj is created return the same static obj
-factory CartModel()=>cartModelobj;
-
-  CatalogModel _catalog;
+ late  CatalogModel _catalog;
   //CatalogModel get catalog => _catalog;
-  set  catalog(CatalogModel newCatalog) => _catalog =_catalog;
+  set  catalog(CatalogModel newCatalog) => _catalog =newCatalog;
 
 
 //maintains ids of products in cart
@@ -36,7 +31,7 @@ List<Item?> get items => itemIds.map((e) => _catalog.getbyid(e)).toList();
     itemIds.add(item.id);
   }
 
-   void remove(Item item){
-    itemIds.remove(item.id);
+   void remove(Item? item){
+    itemIds.remove(item?.id);
   }
 }

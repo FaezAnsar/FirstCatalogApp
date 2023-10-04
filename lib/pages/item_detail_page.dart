@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hindi_course/widgets/AddtoCart.dart';
 
 import '../models/catalog.dart';
 
@@ -27,10 +28,7 @@ class ItemDetailPage extends StatelessWidget {
                           //wrapped with sized box to change butoon width height
                           SizedBox(width: 120,height: 50,
 
-                            child: ElevatedButton(onPressed: (){}, child: Text("Add to Cart"),style: ButtonStyle(
-                              shape: MaterialStatePropertyAll(BeveledRectangleBorder(borderRadius: BorderRadius.circular(6),)
-                              ,),
-                              backgroundColor: MaterialStatePropertyAll(Theme.of(context).focusColor))))
+                            child: AddtoCart(item: item))
                           ],
                           
         ),
