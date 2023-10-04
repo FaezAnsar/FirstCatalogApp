@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hindi_course/models/cart.dart';
+import 'package:hindi_course/models/catalog.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../core/store.dart';
@@ -33,10 +34,12 @@ class CartPage extends StatelessWidget {
 class CartList extends StatelessWidget {
    CartList({super.key});
 
+    
   final CartModel _cart = (VxState.store as MyStore).cart;
 
   @override
   Widget build(BuildContext context) {
+    VxState.watch(context,on:[RemoveMutation]);
     if (_cart.items.isEmpty) {
       return Center(child: Text("Nothing to show",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),));
     } else {
@@ -46,7 +49,7 @@ class CartList extends StatelessWidget {
         leading: Icon(Icons.done),
         trailing: IconButton(icon: Icon(Icons.remove_circle_outline,),
         onPressed:() { 
-          _cart.remove(_cart.items[index]) ;
+          RemoveMutation(_cart.items[index]??Item(id: 1, name: "faez", desc:"jioji" , price: 9000, color: "#1c1c1c", image: "https://lh3.googleusercontent.com/qRQPjHrhRVIs-xnfNSyiPXOH2vH97ylMacgbTKebqJtRfNH3LlYo8pN-5igsLDWUH62tGl5zNpTsl5xd8SprzGmXoCEmWFOi2-2cQVGS-r3PaRXHt62DmJHq-jrYX0UQvWZ9BA=s800-c")) ;
           ;
           }),
     
@@ -71,7 +74,11 @@ class CartTotal extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text("\$${_cart.totalPrice}",style: TextStyle(fontSize:25),),
+          //didn't use vxwatch at start to prevent whole widget from being built as we just wanted to rebuild price
+          VxBuilder(mutations: {RemoveMutation},
+          builder:(context, _,__) =>Text("\$${_cart.totalPrice}",style: TextStyle(fontSize:25),))
+            
+          ,
           ElevatedButton(onPressed: (){
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Buying not supported yet.")));
           }, child: Text("Buy"),style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).focusColor)))        ],

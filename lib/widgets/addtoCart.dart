@@ -14,7 +14,7 @@ class AddtoCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-   VxState.watch(context,on:[AddMutation]);//rebuilds widget when mutation takes place,
+   VxState.watch(context,on:[AddMutation,RemoveMutation]);//rebuilds widget when mutation takes place,
    
     final CartModel _cart = (VxState.store as MyStore).cart;
     bool pressed = _cart.items.contains(item);
