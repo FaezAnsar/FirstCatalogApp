@@ -1,16 +1,31 @@
-# hindi_course
+E-Commerce App
 
-A new Flutter project.
+## Overview
 
-## Getting Started
+Welcome to the **High-End Products App**! This application allows users to browse high-end products with a focus on an appealing and functional user interface. The app includes features for browsing products, adding items to the cart, and supports both light and dark modes.
 
-This project is a starting point for a Flutter application.
+## Key Features
 
-A few resources to get you started if this is your first Flutter project:
+- **Functional UI:** The app offers a smooth and intuitive user interface to enhance the browsing experience.
+- **Browsing:** Users can browse through a curated selection of high-end products.
+- **Add to Cart Functionality:** Easily add products to the cart for potential future purchase.
+- **Supports Light and Dark Mode:** The app adapts to both light and dark themes for a better user experience in different lighting conditions.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Technologies Used
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- **Flutter**: For building the UI and handling interaction.
+- **Dart**: The primary language used for development.
+- **Provider**: For managing the app's state.
+
+## How to Run
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/FaezAnsar/calculator_app.git
+   cd calculator_app
+2. Get dependencies:
+   ```bash
+   flutter pub get
+3. Run on simulator/device:
+   ```bash
+   flutter run
